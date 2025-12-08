@@ -44,7 +44,8 @@ public class MenuPrincipal extends JFrame{
         resultadosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Resultados ventana = new Resultados();
+                ventana.setVisible(true);
             }
         });
         estadisticasButton.addActionListener(new ActionListener() {
