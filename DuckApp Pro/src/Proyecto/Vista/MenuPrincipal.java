@@ -31,7 +31,8 @@ public class MenuPrincipal extends JFrame{
         gestionarParticipantesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Registro ventana = new Registro();
+                ventana.setVisible(true);
             }
         });
         simularCarreraButton.addActionListener(new ActionListener() {
