@@ -38,7 +38,8 @@ public class MenuPrincipal extends JFrame{
         simularCarreraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Simulacion ventana = new Simulacion();
+                ventana.setVisible(true);
             }
         });
         resultadosButton.addActionListener(new ActionListener() {
