@@ -18,6 +18,7 @@ public class Registro extends JFrame{
     private JButton registrarPerticipanteButton;
     private JTable ParticipantesTabla;
     private JButton eliminarParticipanteButton;
+    private JButton volverAlMenuPrincipalButton;
 
     private DefaultTableModel modeloTabla;
     private GestorParticipantes gestorParticipantes;
@@ -42,6 +43,12 @@ public class Registro extends JFrame{
         eliminarParticipanteButton.addActionListener(e -> eliminarParticipante());
 
         cargarTabla();
+
+        //boton para volver al menu principal
+        volverAlMenuPrincipalButton.addActionListener(e -> {
+            MenuPrincipal.getInstancia().volverAlMenuPrincipal();
+            dispose();
+        });
     }
 
     private void registrarParticipante(){

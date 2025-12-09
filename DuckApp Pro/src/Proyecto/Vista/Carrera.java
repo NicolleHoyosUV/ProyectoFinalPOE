@@ -17,9 +17,16 @@ public class Carrera extends JFrame{
     private JButton crearCarreraButton;
     private JTable table1;
     private JButton eliminarCarreraButton;
+    private JButton volverAlMenuPrincipalButton;
 
     private DefaultTableModel modeloTabla;
     private GestorCarreras gestorCarreras;
+
+    // Variable para mantener referencia única
+    private static MenuPrincipal instance;
+
+
+
 
     public Carrera() {
         setContentPane(carreraPanel);
@@ -30,6 +37,7 @@ public class Carrera extends JFrame{
 
         //inicializar gestor
         gestorCarreras = new GestorCarreras();
+
 
 
         //configurar tabla
@@ -44,6 +52,12 @@ public class Carrera extends JFrame{
         eliminarCarreraButton.addActionListener(e -> eliminarCarrera());
 
         cargarTabla();
+
+        //Boton para volver al menu
+        volverAlMenuPrincipalButton.addActionListener(e -> {
+            MenuPrincipal.getInstancia().volverAlMenuPrincipal();
+            dispose();
+        });
     }
 
     private void crearCarrera(){
@@ -92,4 +106,6 @@ public class Carrera extends JFrame{
         comboBox1.setSelectedIndex(0);
         textField1.setText("");
     }
+
+
 }

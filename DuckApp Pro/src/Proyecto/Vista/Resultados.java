@@ -8,7 +8,8 @@ import Proyecto.Modelo.Resultado;
 import javax.swing.*;
 
 import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Resultados extends JFrame{
     private JButton cargarResultadoButton;
@@ -22,6 +23,11 @@ public class Resultados extends JFrame{
     private JTextField segundoLugarField;
     private JTextField tercerLugarField;
     private JPanel ResultadosPanel;
+    private JButton volverAlMenuPrincipalButton;
+    private JTextArea textAreaGanador;
+    private JButton mostrarGanadorButton;
+    private JTextArea textAreaPodio;
+    private JButton mostrarPodioButton;
 
     private GestorCarreras gestorCarreras;
     private GestorResultados gestorResultados;
@@ -47,6 +53,24 @@ public class Resultados extends JFrame{
         exportarATxtButton.addActionListener(e -> gestorResultados.exportarResultados());
 
         cargarTabla();
+
+        //boton volver al menu principal
+        volverAlMenuPrincipalButton.addActionListener(e -> {
+            MenuPrincipal.getInstancia().volverAlMenuPrincipal();
+            dispose();
+        });
+        mostrarGanadorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarGanador();
+            }
+        });
+        mostrarPodioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarPodio();
+            }
+        });
     }
 
     private void cargarCarrerasEnCombo(){
@@ -91,4 +115,13 @@ public class Resultados extends JFrame{
             });
         }
     }
+
+
+    private void mostrarGanador(){
+
+    }
+    private void mostrarPodio(){
+
+    }
+
 }

@@ -7,12 +7,14 @@ public class Participantes {
     private int numeroPato;
     private String categoria;
 
+
     public Participantes(String nombre, int edad, String documento, int numeroPato, String categoria) {
         this.nombre = nombre;
         this.edad = edad;
         this.documento = documento;
         this.numeroPato = numeroPato;
         this.categoria = categoria;
+
     }
 
     public String getNombre() { return nombre; }
@@ -20,4 +22,5 @@ public class Participantes {
     public String getDocumento() { return documento; }
     public int getNumeroPato() { return numeroPato; }
     public String getCategoria() { return categoria; }
+
 }

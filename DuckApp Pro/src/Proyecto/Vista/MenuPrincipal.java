@@ -12,12 +12,18 @@ public class MenuPrincipal extends JFrame{
     private JButton resultadosButton;
     private JPanel menuPanel;
 
+
+    //instancia para usar metodo volver al menu pincipal en todas las vistas
+    private static MenuPrincipal instancia;
+
     public MenuPrincipal(){
         setContentPane(menuPanel);
         setTitle("Duck App Pro");
         setSize(600, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        instancia = this;
 
         //Se enlazan cada uno de los botones con sus respectivas ventanas
         //Ventana Gestionar carrera
@@ -55,6 +61,20 @@ public class MenuPrincipal extends JFrame{
 
             }
         });
+    }
+
+
+    //ir menu principal
+    public static MenuPrincipal getInstancia() {
+        return instancia;
+    }
+
+    //metodo par volver al menu principal
+    public void volverAlMenuPrincipal() {
+        // Asegurarse de mostrar y centrar
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.toFront();
     }
 
     public static void main(String[] args) {
