@@ -1,6 +1,10 @@
 package Proyecto.Modelo;
 
-public class Carreras {
+
+import java.io.Serializable;  //para los archivos .dat
+public class Carreras implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String nombre;
     private String categoria;
     private String fecha;

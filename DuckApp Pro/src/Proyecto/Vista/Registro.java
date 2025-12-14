@@ -2,13 +2,13 @@ package Proyecto.Vista;
 
 import Proyecto.Controlador.GestorParticipantes;
 import Proyecto.Modelo.Participantes;
-
 import javax.swing.*;
-
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Registro extends JFrame{
+public class Registro extends JFrame{   //La clase herada del Jframe
     private JPanel registroPanel;
     private JTextField NombreField;
     private JTextField EdadField;
@@ -19,6 +19,8 @@ public class Registro extends JFrame{
     private JTable ParticipantesTabla;
     private JButton eliminarParticipanteButton;
     private JButton volverAlMenuPrincipalButton;
+    private JLabel lblTitulo;
+    private JButton irALaCarreraButton;
 
     private DefaultTableModel modeloTabla;
     private GestorParticipantes gestorParticipantes;
@@ -32,24 +34,33 @@ public class Registro extends JFrame{
 
         gestorParticipantes = new GestorParticipantes();
 
-        //se crea el modelo de la tabla
+        //Se crea el modelo de la tabla
         modeloTabla = new DefaultTableModel(
                 new Object[]{"Nombre", "Edad", "Documento", "N° Pato", "Categoría"}, 0);
 
         ParticipantesTabla.setModel(modeloTabla);
-
         registrarPerticipanteButton.addActionListener(e -> registrarParticipante());
-
         eliminarParticipanteButton.addActionListener(e -> eliminarParticipante());
-
         cargarTabla();
 
-        //boton para volver al menu principal
+        lblTitulo.setText("🗒️ REGISTRO DE CARRERAS 🗒️");
+
+        //Boton para volver al menu principal
         volverAlMenuPrincipalButton.addActionListener(e -> {
             MenuPrincipal.getInstancia().volverAlMenuPrincipal();
             dispose();
         });
+
+        //Boton para acceder directamente a la simulacion
+        irALaCarreraButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                irALaSimulacion();
+            }
+        });
     }
+
+    //Metodo para registrar el participante
 
     private void registrarParticipante(){
         String nombre = NombreField.getText();
@@ -86,7 +97,14 @@ public class Registro extends JFrame{
 
         cargarTabla();
         limpiarCampos();
+
+        // Opcional: Mensaje de confirmación
+        JOptionPane.showMessageDialog(this,
+                "✅ Participante registrado exitosamente.\n" +
+                        "Datos guardados automáticamente en 'participantes.dat'");
     }
+
+    //Eliminar un participante por seleccion del usuario
 
     private void eliminarParticipante(){
         int fila = ParticipantesTabla.getSelectedRow();
@@ -101,6 +119,8 @@ public class Registro extends JFrame{
 
         cargarTabla();
     }
+
+    //cargar la informacion en la tabla
 
     private void cargarTabla(){
         modeloTabla.setRowCount(0);
@@ -118,11 +138,18 @@ public class Registro extends JFrame{
         }
     }
 
+    //limpiar campos una ves creado el registro
+
     private void limpiarCampos(){
         NombreField.setText("");
         EdadField.setText("");
         DocumentoField.setText("");
         N_PatosField.setText("");
         CategoriacomboBox.setSelectedIndex(0);
+    }
+
+
+    private void irALaSimulacion(){
+        //falta
     }
 }

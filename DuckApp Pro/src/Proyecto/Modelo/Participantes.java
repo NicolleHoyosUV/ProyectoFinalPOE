@@ -1,6 +1,10 @@
 package Proyecto.Modelo;
 
-public class Participantes {
+
+import java.io.Serializable;
+public class Participantes implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     private String nombre;
     private int edad;
     private String documento;

@@ -18,6 +18,8 @@ public class Carrera extends JFrame{
     private JTable table1;
     private JButton eliminarCarreraButton;
     private JButton volverAlMenuPrincipalButton;
+    private JLabel lblTitulo;
+    private JButton crearPartcipanteButton;
 
     private DefaultTableModel modeloTabla;
     private GestorCarreras gestorCarreras;
@@ -47,8 +49,9 @@ public class Carrera extends JFrame{
         //Accion crear carrea
         crearCarreraButton.addActionListener(e -> crearCarrera());
 
-        //Accion eliminar carrera
+        lblTitulo.setText("🏁 CREAR DE CARRERA 🏁 ");
 
+        //Accion eliminar carrera
         eliminarCarreraButton.addActionListener(e -> eliminarCarrera());
 
         cargarTabla();
@@ -57,6 +60,15 @@ public class Carrera extends JFrame{
         volverAlMenuPrincipalButton.addActionListener(e -> {
             MenuPrincipal.getInstancia().volverAlMenuPrincipal();
             dispose();
+        });
+
+        //Boton crear participante
+        crearPartcipanteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirVentanaPartcipante();
+
+            }
         });
     }
 
@@ -108,4 +120,7 @@ public class Carrera extends JFrame{
     }
 
 
+    private void abrirVentanaPartcipante(){
+        //falta
+    }
 }
