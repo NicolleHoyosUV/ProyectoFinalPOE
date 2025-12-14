@@ -31,6 +31,7 @@ public class Simulacion extends JFrame {
     private JLabel pato6;
     private JButton volverAlMenuPrincipalButton;
     private JButton verResultadosButton;
+    private JLabel meta;
 
     private Timer timer;
     private final int META = 700;
@@ -45,6 +46,10 @@ public class Simulacion extends JFrame {
     private ArrayList<Participantes> participantesCarrera;
     private String nombreCarreraActual;
     private String categoriaCarreraActual;
+
+    //Tiempos
+    private long tiempoInicio;
+    private long tiempoFin;
 
     public Simulacion() {
 
@@ -68,9 +73,20 @@ public class Simulacion extends JFrame {
         cargarImagen(pato1, "/pato1.png");
         cargarImagen(pato2, "/pato2.png");
         cargarImagen(pato3, "/pato3.png");
-        cargarImagen(pato4, "/pato4.png");
-        cargarImagen(pato5, "/pato1.png");
-        cargarImagen(pato6, "/pato2.png");
+        cargarImagen(pato4, "/pato1.png");
+        cargarImagen(pato5, "/pato2.png");
+        cargarImagen(pato6, "/pato3.png");
+
+        // Cargar imagen de la META
+        cargarMeta();
+
+        // Asegurar que los patos estén delante de la meta
+        pistaPanel.setComponentZOrder(pato1, 0);
+        pistaPanel.setComponentZOrder(pato2, 0);
+        pistaPanel.setComponentZOrder(pato3, 0);
+        pistaPanel.setComponentZOrder(pato4, 0);
+        pistaPanel.setComponentZOrder(pato5, 0);
+        pistaPanel.setComponentZOrder(pato6, 0);
 
         //posiciones iniciales
         resetPosiciones();
@@ -94,6 +110,13 @@ public class Simulacion extends JFrame {
                 verResultados();
             }
         });
+    }
+
+    // ---------- CARGAR META ---------- //
+    private void cargarMeta() {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/ImgMeta.png"));
+        Image img = icon.getImage().getScaledInstance(60, 550, Image.SCALE_SMOOTH);
+        meta.setIcon(new ImageIcon(img));
     }
 
     // Cargar informacion de la última carrera creada
@@ -150,6 +173,7 @@ public class Simulacion extends JFrame {
 
     // ---------- INICIAR CARRERA ---------- //
     private void iniciarCarrera() {
+        tiempoInicio = System.currentTimeMillis(); // ⏱️ INICIO REAL
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -168,16 +192,21 @@ public class Simulacion extends JFrame {
 
     // ---------- MOVER CADA PATO ---------- //
     private void moverPato(JLabel pato, String nombre) {
-        int avance = (int) (Math.random() * 8) + 4;
+        int avance = (int) (Math.random() * 10) + 1;
         pato.setLocation(pato.getX() + avance, pato.getY());
 
-        if (pato.getX() >= META) {
+        if (pato.getX() + pato.getWidth() >= meta.getX()) {
             timer.stop();
+            tiempoFin = System.currentTimeMillis(); // ⏱️ FIN REAL
             JOptionPane.showMessageDialog(null, "¡¡Ha ganado la carrera!!  " + nombre);
             mostrarPodio();
         }
     }
 
+    // Obtener tiempo real en segundos
+    private double obtenerTiempoReal() {
+        return (tiempoFin - tiempoInicio) / 1000.0;
+    }
 
 
     // Mostrar podio y guardar resultados
@@ -208,7 +237,8 @@ public class Simulacion extends JFrame {
         String tercerLugar = obtenerNombreParticipante(indicesPodio[2]);
 
         // Calcular tiempo simulado basado en la distancia recorrida
-        double tiempoGanador = calcularTiempo(patosArray[0].getX());
+        //double tiempoGanador = calcularTiempo(patosArray[0].getX());
+        double tiempoGanador = obtenerTiempoReal();
 
         // Crear ArrayList para el podio
         ArrayList<String> podio = new ArrayList<>();
@@ -254,12 +284,6 @@ public class Simulacion extends JFrame {
             return p.getNombre() + " (Pato #" + p.getNumeroPato() + ")";
         }
         return "Participante " + (index + 1) + " (Genérico)";
-    }
-
-    // Calcular tiempo basado en distancia
-    private double calcularTiempo(int distancia) {
-        // Fórmula: tiempo base + (distancia / velocidad promedio)
-        return 5.0 + (distancia / 25.0);
     }
 
     // Mostrar mensaje del podio

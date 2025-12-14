@@ -49,7 +49,7 @@ public class Carrera extends JFrame{
         //Accion crear carrea
         crearCarreraButton.addActionListener(e -> crearCarrera());
 
-        lblTitulo.setText("🏁 CREAR DE CARRERA 🏁 ");
+        lblTitulo.setText("🏁  CARRERA  🏁 ");
 
         //Accion eliminar carrera
         eliminarCarreraButton.addActionListener(e -> eliminarCarrera());
