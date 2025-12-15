@@ -14,7 +14,7 @@
         </constraints>
         <properties>
           <font name="Elephant" size="20" style="0"/>
-          <text value="DUCK APP PRO — RACING EDITION 🦆"/>
+          <text value="DUCK APP PROO 🦆"/>
         </properties>
       </component>
       <component id="cf059" class="javax.swing.JButton" binding="gestionarCarrerasButton" default-binding="true">

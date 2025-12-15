@@ -2,11 +2,11 @@
        ESTADÍSTICAS DE CARRERAS
 =============================================
 
-Fecha de generación: Sun Dec 14 08:10:10
-Total carreras: 32
+Fecha de generación: Mon Dec 15 17:49:11 GMT-05:00 2025
+Total carreras: 66
 
 🏆 PARTICIPANTE CON MÁS PODIOS:
-🥇 Samuel (Pato #12) (16 podios)
+🥇 Juan (Pato #1223) (31 podios)
 
 ⚡ PATO MÁS RÁPIDO:
 ⚡ Pato 4 (11,52 seg promedio)

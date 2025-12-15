@@ -26,8 +26,7 @@ public class Resultados extends JFrame{
     private JButton mostrarGanadorButton;
     private JTextArea textAreaPodio;
     private JButton mostrarPodioButton;
-    private JLabel lbllTitulo;
-    private JButton verEstadisticasButton;
+    private JLabel lblTitulo;
 
     private GestorCarreras gestorCarreras;
     private GestorResultados gestorResultados;
@@ -55,13 +54,14 @@ public class Resultados extends JFrame{
         exportarATxtButton.addActionListener(e -> gestorResultados.exportarResultados());
 
         cargarTabla();
-        lbllTitulo.setText("🏆 RESULTADOS DE CARRERAS 🏆");
+        lblTitulo.setText("🏆 RESULTADOS DE CARRERAS 🏆");
 
         //Boton volver al menu principal
         volverAlMenuPrincipalButton.addActionListener(e -> {
             MenuPrincipal.getInstancia().volverAlMenuPrincipal();
             dispose();
         });
+
 
         //Boton mostrar ganador
         mostrarGanadorButton.addActionListener(new ActionListener() {
@@ -70,6 +70,8 @@ public class Resultados extends JFrame{
                 mostrarGanador();
             }
         });
+
+
 
         //Boton mostar podio
         mostrarPodioButton.addActionListener(new ActionListener() {
@@ -87,13 +89,7 @@ public class Resultados extends JFrame{
             }
         });
 
-        //Boton para ver estadisticas
-        verEstadisticasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                verEstadisticas();
-            }
-        });
+
     }
 
     //Cargar las carreras creadas a un txt
@@ -105,6 +101,7 @@ public class Resultados extends JFrame{
             CarreraComboBox.addItem(c.getNombre());
         }
     }
+
 
     private void cargarResultado(){
         String carreraSeleccionada = (String) CarreraComboBox.getSelectedItem();
@@ -131,6 +128,8 @@ public class Resultados extends JFrame{
 
 
 
+
+
     //Cargar la informacion de los resultados a la tabla
     private void cargarTabla(){
         // Limpiar la tabla antes de cargar
@@ -148,6 +147,7 @@ public class Resultados extends JFrame{
             });
         }
     }
+
 
 
     //Mostrar el ganador
@@ -182,6 +182,8 @@ public class Resultados extends JFrame{
         ganadorTiempoField.setText(String.format("%.2f seg", r.getTiempo()));
     }
 
+
+
     //Muestra el podio al final de la carrera
 
     private void mostrarPodio() {
@@ -200,21 +202,21 @@ public class Resultados extends JFrame{
         // Limpiar y mostrar en el TextArea
         textAreaPodio.setText("");
         textAreaPodio.append("🏅 **PODIO COMPLETO** 🏅\n");
-        textAreaPodio.append("══════════════════════════\n\n");
+        textAreaPodio.append("═════════════════════════════════════════════════\n\n");
         textAreaPodio.append("📌 Carrera: " + r.getCarrera() + "\n");
         textAreaPodio.append("📅 Fecha: " + r.getFecha() + "\n");
         textAreaPodio.append("⏱️  Tiempo del ganador: " + String.format("%.2f", r.getTiempo()) + " seg\n\n");
 
-        textAreaPodio.append("🥇 **PRIMER LUGAR:**\n");
-        textAreaPodio.append("   " + r.getPodio().get(0) + " - Ganador\n\n");
+        textAreaPodio.append("-----------------------------------------------------------------------------\n");
+        textAreaPodio.append("                           🥇 **PRIMER LUGAR:**\n");
+        textAreaPodio.append("                        " + r.getPodio().get(0) + " - Ganador\n\n\n");
 
-        textAreaPodio.append("🥈 **SEGUNDO LUGAR:**\n");
-        textAreaPodio.append("   " + r.getPodio().get(1) + "\n\n");
+        textAreaPodio.append("🥈 **SEGUNDO LUGAR:**                               "+"🥉**TERCER LUGAR:**\n");
+        textAreaPodio.append("   " + r.getPodio().get(1) + "                      "+ r.getPodio().get(2) + "\n\n");
 
-        textAreaPodio.append("🥉 **TERCER LUGAR:**\n");
-        textAreaPodio.append("   " + r.getPodio().get(2) + "\n\n");
 
-        textAreaPodio.append("══════════════════════════\n");
+
+        textAreaPodio.append("══════════════════════════════════════════════════════\n");
         textAreaPodio.append("🎉 ¡Felicidades a los ganadores! 🎉");
 
         // También actualizar los campos de texto
@@ -301,8 +303,4 @@ public class Resultados extends JFrame{
         }
     }
 
-    //Metodo para ver  estadisticas
-    private void verEstadisticas(){
-        //aun falta la logica
-    }
 }

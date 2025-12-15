@@ -20,7 +20,6 @@ public class Registro extends JFrame{   //La clase herada del Jframe
     private JButton eliminarParticipanteButton;
     private JButton volverAlMenuPrincipalButton;
     private JLabel lblTitulo;
-    private JButton irALaCarreraButton;
 
     private DefaultTableModel modeloTabla;
     private GestorParticipantes gestorParticipantes;
@@ -50,14 +49,6 @@ public class Registro extends JFrame{   //La clase herada del Jframe
             MenuPrincipal.getInstancia().volverAlMenuPrincipal();
             dispose();
         });
-
-        //Boton para acceder directamente a la simulacion
-        irALaCarreraButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                irALaSimulacion();
-            }
-        });
     }
 
     //Metodo para registrar el participante
@@ -69,8 +60,7 @@ public class Registro extends JFrame{   //La clase herada del Jframe
         String numeroPatoTxt = N_PatosField.getText();
         String categoria = CategoriacomboBox.getSelectedItem().toString();
 
-        if (nombre.isEmpty() || edadTxt.isEmpty() || documento.isEmpty() ||
-                numeroPatoTxt.isEmpty() || categoria.equals("Seleccione")) {
+        if (nombre.isEmpty() || edadTxt.isEmpty() || documento.isEmpty() || numeroPatoTxt.isEmpty() || categoria.equals("Seleccione")) {
 
             JOptionPane.showMessageDialog(this, "Complete todos los campos.");
             return;
@@ -138,7 +128,7 @@ public class Registro extends JFrame{   //La clase herada del Jframe
         }
     }
 
-    //limpiar campos una ves creado el registro
+    //limpiar campos una vez creado el registro
 
     private void limpiarCampos(){
         NombreField.setText("");
@@ -146,10 +136,5 @@ public class Registro extends JFrame{   //La clase herada del Jframe
         DocumentoField.setText("");
         N_PatosField.setText("");
         CategoriacomboBox.setSelectedIndex(0);
-    }
-
-
-    private void irALaSimulacion(){
-        //falta
     }
 }

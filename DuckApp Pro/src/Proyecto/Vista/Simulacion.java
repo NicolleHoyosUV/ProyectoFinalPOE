@@ -32,6 +32,7 @@ public class Simulacion extends JFrame {
     private JButton volverAlMenuPrincipalButton;
     private JButton verResultadosButton;
     private JLabel meta;
+    private JLabel lblTitulo;
 
     private Timer timer;
     private final int META = 700;
@@ -62,6 +63,8 @@ public class Simulacion extends JFrame {
         gestorCarreras = new GestorCarreras();
         gestorParticipantes = new GestorParticipantes();
 
+        //para el titulo
+        lblTitulo.setText("🏁🦆  DuackProo 🦆 🏁 ");
 
         cargarInformacionCarrera();
         cargarParticipantes();
@@ -190,15 +193,19 @@ public class Simulacion extends JFrame {
         timer.start();
     }
 
+
     // ---------- MOVER CADA PATO ---------- //
     private void moverPato(JLabel pato, String nombre) {
         int avance = (int) (Math.random() * 10) + 1;
         pato.setLocation(pato.getX() + avance, pato.getY());
 
+
+
         if (pato.getX() + pato.getWidth() >= meta.getX()) {
             timer.stop();
             tiempoFin = System.currentTimeMillis(); // ⏱️ FIN REAL
-            JOptionPane.showMessageDialog(null, "¡¡Ha ganado la carrera!!  " + nombre);
+            JOptionPane.showMessageDialog(null, "+🏆 ¡El titulo de campeón se lo lleva ! 🏆  \n  "+"                " + nombre);
+
             mostrarPodio();
         }
     }
@@ -291,35 +298,23 @@ public class Simulacion extends JFrame {
         StringBuilder mensaje = new StringBuilder();
 
         mensaje.append("🏆 **RESULTADOS OFICIALES** 🏆\n\n");
-        mensaje.append("📌 Carrera: ").append(resultado.getCarrera()).append("\n");
+        mensaje.append("📌 Nombre de la carrera: ").append(resultado.getCarrera()).append("\n");
         mensaje.append("📋 Categoría: ").append(resultado.getCategoria()).append("\n");
-        mensaje.append("📅 Fecha: ").append(resultado.getFecha()).append("\n\n");
+        mensaje.append("📅 Fecha y hora: ").append(resultado.getFecha()).append("\n\n\n");
 
-        mensaje.append("🥇 **PRIMER LUGAR:**\n");
-        mensaje.append("   ").append(resultado.getGanador()).append("\n\n");
+        mensaje.append("---------------------------------------------------------------------------------------------\n");
+        mensaje.append("                                      🥇 **PRIMER LUGAR:**\n");
+        mensaje.append("                           ").append(resultado.getGanador()).append("\n\n");
 
-        mensaje.append("🥈 **SEGUNDO LUGAR:**\n");
-        mensaje.append("   ").append(resultado.getPodio().get(1)).append("\n\n");
+        mensaje.append("🥈 **SEGUNDO LUGAR:**                                "+"🥉 **TERCER LUGAR:**\n");
+        mensaje.append("   ").append(resultado.getPodio().get(1)).append("                                  "); mensaje.append(" ").append(resultado.getPodio().get(2)).append("\n");
 
-        mensaje.append("🥉 **TERCER LUGAR:**\n");
-        mensaje.append("   ").append(resultado.getPodio().get(2)).append("\n\n");
+        mensaje.append("---------------------------------------------------------------------------------------------\n\n");
+
 
         mensaje.append("⏱️  Tiempo del ganador: ").append(String.format("%.2f", resultado.getTiempo())).append(" segundos\n\n");
 
-        mensaje.append("✅ **Información guardada en el sistema**\n");
-        mensaje.append("📁 Archivo: resultados.dat\n\n");
-
-        mensaje.append("🏁 **RESULTADOS COMPLETOS** 🏁\n");
-        String[] posiciones = {"1°", "2°", "3°", "4°", "5°", "6°"};
-
-        for (int i = 0; i < patosArray.length; i++) {
-            int index = obtenerIndicePato(patosArray[i]);
-            String nombre = obtenerNombreParticipante(index);
-            mensaje.append(posiciones[i]).append(" - ").append(nombre)
-                    .append(" (Distancia: ").append(patosArray[i].getX()).append(" px)\n");
-        }
-
-        mensaje.append("\n🎉 ¡Felicidades a los ganadores! 🎉");
+       mensaje.append("\n🎉 ¡Felicidades a los ganadores! 🎉");
 
         JOptionPane.showMessageDialog(
                 this,

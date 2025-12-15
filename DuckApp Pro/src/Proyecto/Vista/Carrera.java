@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;   //para colocar la fecha por defecto
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Carrera extends JFrame{
     private JPanel carreraPanel;
@@ -19,7 +21,6 @@ public class Carrera extends JFrame{
     private JButton eliminarCarreraButton;
     private JButton volverAlMenuPrincipalButton;
     private JLabel lblTitulo;
-    private JButton crearPartcipanteButton;
 
     private DefaultTableModel modeloTabla;
     private GestorCarreras gestorCarreras;
@@ -41,6 +42,7 @@ public class Carrera extends JFrame{
         gestorCarreras = new GestorCarreras();
 
 
+        establecerFechaActual();
 
         //configurar tabla
         modeloTabla = new DefaultTableModel(new Object[]{"Nombre", "Categoria", "Fecha"},0);
@@ -62,16 +64,16 @@ public class Carrera extends JFrame{
             dispose();
         });
 
-        //Boton crear participante
-        crearPartcipanteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                abrirVentanaPartcipante();
-
-            }
-        });
     }
 
+
+
+    // Método para establecer fecha actual
+    private void establecerFechaActual() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaActual = sdf.format(new Date());
+        textField1.setText(fechaActual);
+    }
     private void crearCarrera(){
         String nombre = NombCarrera.getText();
         String categoria = comboBox1.getSelectedItem().toString();
@@ -120,7 +122,5 @@ public class Carrera extends JFrame{
     }
 
 
-    private void abrirVentanaPartcipante(){
-        //falta
-    }
+
 }
