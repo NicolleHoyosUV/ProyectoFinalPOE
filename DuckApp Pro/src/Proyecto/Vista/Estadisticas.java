@@ -18,10 +18,12 @@ public class Estadisticas extends JFrame{
     private JLabel LblParticipanteConMasPodios;
     private JLabel LblPatoMasRapido;
     private JLabel lblTitulo;
+    private JLabel fondoLabel;
     private GestorResultados gestorResultados;
 
 
     public Estadisticas() {
+
         setContentPane(mainPanel);
         setTitle("Estadísticas - DuckApp Pro");
         setSize(500, 300);

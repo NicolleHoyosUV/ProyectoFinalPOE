@@ -16,16 +16,3 @@ Posición: 1° Lugar
 
 🏅 **PODIO OFICIAL** 🏅
 --------------------------------------
-🥇 PRIMER LUGAR: Participante 1 (Pato #100)
-🥈 SEGUNDO LUGAR: Participante 2 (Pato #101)
-🥉 TERCER LUGAR: Participante 3 (Pato #102)
-
-📊 **INFORMACIÓN ADICIONAL** 📊
---------------------------------------
-Fecha de exportación: 2025-12-13 20:06:22
-Archivo generado por: DuckApp Pro
-Sistema de gestión de carreras de patos
-
-=============================================
-        ¡FELICIDADES A LOS GANADORES!        
-=============================================

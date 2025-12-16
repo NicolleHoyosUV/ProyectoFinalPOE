@@ -6,6 +6,7 @@ import Proyecto.Modelo.Carreras;
 import Proyecto.Modelo.Resultado;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,22 +28,32 @@ public class Resultados extends JFrame{
     private JTextArea textAreaPodio;
     private JButton mostrarPodioButton;
     private JLabel lblTitulo;
+    private JLabel fondoLabel;
 
     private GestorCarreras gestorCarreras;
     private GestorResultados gestorResultados;
     private DefaultTableModel modeloTabla;
 
     public Resultados(){
-        setContentPane(ResultadosPanel);
+        // Cargar imagen
+        ImageIcon icon = new ImageIcon(getClass().getResource("/resultados.jpg"));
+        Image img = icon.getImage().getScaledInstance(900, 700, Image.SCALE_SMOOTH);
+        fondoLabel.setIcon(new ImageIcon(img));
+
+        // Usar el fondo como contenedor
+        setContentPane(fondoLabel);
+        fondoLabel.setLayout(new BorderLayout());
+        fondoLabel.add(ResultadosPanel);
+
+        // Panel transparente
+        ResultadosPanel.setOpaque(false);
+
         setTitle("Resultados de Carreras");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         //inicializacion de gestores
-
-        gestorCarreras = new GestorCarreras();
-        gestorResultados = new GestorResultados();
         gestorCarreras = new GestorCarreras();
         gestorResultados = new GestorResultados();
 

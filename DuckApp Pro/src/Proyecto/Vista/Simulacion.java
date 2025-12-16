@@ -23,6 +23,7 @@ public class Simulacion extends JFrame {
     private JButton iniciarButton;
     private JButton reiniciarButton;
     private JPanel pistaPanel;
+    private JLabel fondoLabel;
     private JLabel pato1;
     private JLabel pato2;
     private JLabel pato3;
@@ -33,6 +34,7 @@ public class Simulacion extends JFrame {
     private JButton verResultadosButton;
     private JLabel meta;
     private JLabel lblTitulo;
+
 
     private Timer timer;
     private final int META = 700;
@@ -54,9 +56,29 @@ public class Simulacion extends JFrame {
 
     public Simulacion() {
 
-        setContentPane(simulacionPanel);
-        setSize(900, 700);
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(780, 700));
+        setContentPane(layeredPane);
+
+        //llama la funcion del fondo
+        fondo(layeredPane);
+
+        simulacionPanel.setBounds(0, 0, 900, 700);
+        simulacionPanel.setOpaque(false);
+        pistaPanel.setOpaque(false);
+
+        layeredPane.add(simulacionPanel, JLayeredPane.PALETTE_LAYER);
+
+        pack();
         setLocationRelativeTo(null);
+
+        /*setContentPane(simulacionPanel);
+        setSize(900, 700);
+        setLocationRelativeTo(null);*/
+
+
+        //cargar fondo pista
+        pistaPanel.setOpaque(false);
 
         // Inicializar gestores
         gestorResultados = new GestorResultados();
@@ -64,13 +86,15 @@ public class Simulacion extends JFrame {
         gestorParticipantes = new GestorParticipantes();
 
         //para el titulo
-        lblTitulo.setText("🏁🦆  DuackProo 🦆 🏁 ");
+        lblTitulo.setText("🏁🦆  DuckPro 🦆 🏁 ");
+        lblTitulo.setForeground(Color.YELLOW);
 
         cargarInformacionCarrera();
         cargarParticipantes();
 
         // Crea y pasa al controlador
         JLabel[] patos = new JLabel[]{pato1, pato2, pato3, pato4, pato5, pato6};
+
 
         // Cargar imágenes de los patos
         cargarImagen(pato1, "/pato1.png");
@@ -114,6 +138,16 @@ public class Simulacion extends JFrame {
             }
         });
     }
+
+    //----------- CARGAR FONDO ----------//
+    private void fondo(JLayeredPane layeredPane) {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/agua2.jpg"));
+        Image img = icon.getImage().getScaledInstance(780, 700, Image.SCALE_SMOOTH);
+        fondoLabel.setIcon(new ImageIcon(img));
+        fondoLabel.setBounds(0, 0, 780, 700);
+        layeredPane.add(fondoLabel, JLayeredPane.DEFAULT_LAYER);
+    }
+
 
     // ---------- CARGAR META ---------- //
     private void cargarMeta() {
@@ -330,4 +364,5 @@ public class Simulacion extends JFrame {
         vr.setVisible(true);
         vr.setLocationRelativeTo(null);
     }
+
 }

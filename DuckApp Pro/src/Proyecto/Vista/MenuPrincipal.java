@@ -1,6 +1,7 @@
 package Proyecto.Vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,17 +13,31 @@ public class MenuPrincipal extends JFrame{
     private JButton resultadosButton;
     private JPanel menuPanel;
     private JButton salirButton;
+    private JLabel fondoLabel;
 
 
     //Instancia para usar metodo volver al menu pincipal en todas las vistas
     private static MenuPrincipal instancia;
 
     public MenuPrincipal(){
-        setContentPane(menuPanel);
+        // Cargar imagen
+        ImageIcon icon = new ImageIcon(getClass().getResource("/menu.jpg"));
+        Image img = icon.getImage().getScaledInstance(700, 500, Image.SCALE_SMOOTH);
+        fondoLabel.setIcon(new ImageIcon(img));
+
+        // Usar el fondo como contenedor
+        setContentPane(fondoLabel);
+        fondoLabel.setLayout(new BorderLayout());
+        fondoLabel.add(menuPanel);
+
+        // Panel transparente
+        menuPanel.setOpaque(false);
+
         setTitle("Duck App Pro");
         setSize(600, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 
         instancia = this;
 
@@ -79,7 +94,6 @@ public class MenuPrincipal extends JFrame{
         });
 
     }
-
 
     //Ir menu principal
     public static MenuPrincipal getInstancia() {

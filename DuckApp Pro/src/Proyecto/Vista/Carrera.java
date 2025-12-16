@@ -5,6 +5,7 @@ import Proyecto.Modelo.Carreras;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;   //para colocar la fecha por defecto
@@ -21,6 +22,7 @@ public class Carrera extends JFrame{
     private JButton eliminarCarreraButton;
     private JButton volverAlMenuPrincipalButton;
     private JLabel lblTitulo;
+    private JLabel fondoLabel;
 
     private DefaultTableModel modeloTabla;
     private GestorCarreras gestorCarreras;
@@ -32,7 +34,20 @@ public class Carrera extends JFrame{
 
 
     public Carrera() {
-        setContentPane(carreraPanel);
+        // Cargar imagen
+        ImageIcon icon = new ImageIcon(getClass().getResource("/carrera2.jpg"));
+        Image img = icon.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+        fondoLabel.setIcon(new ImageIcon(img));
+
+        // Usar el fondo como contenedor
+        setContentPane(fondoLabel);
+        fondoLabel.setLayout(new BorderLayout());
+        fondoLabel.add(carreraPanel);
+
+        // Panel transparente
+        carreraPanel.setOpaque(false);
+
+
         setTitle("Gestión de Carreras");
         setSize(700, 500);
         setLocationRelativeTo(null);

@@ -4,6 +4,7 @@ import Proyecto.Controlador.GestorParticipantes;
 import Proyecto.Modelo.Participantes;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,12 +21,26 @@ public class Registro extends JFrame{   //La clase herada del Jframe
     private JButton eliminarParticipanteButton;
     private JButton volverAlMenuPrincipalButton;
     private JLabel lblTitulo;
+    private JLabel fondoLabel;
 
     private DefaultTableModel modeloTabla;
     private GestorParticipantes gestorParticipantes;
 
     public Registro (){
-        setContentPane(registroPanel);
+        // Cargar imagen
+        ImageIcon icon = new ImageIcon(getClass().getResource("/participantes.jpg"));
+        Image img = icon.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+        fondoLabel.setIcon(new ImageIcon(img));
+
+        // Usar el fondo como contenedor
+        setContentPane(fondoLabel);
+        fondoLabel.setLayout(new BorderLayout());
+        fondoLabel.add(registroPanel);
+
+        // Panel transparente
+        registroPanel.setOpaque(false);
+
+
         setTitle("Registro de Participantes");
         setSize(750, 500);
         setLocationRelativeTo(null);

@@ -1,0 +1,19 @@
+=============================================
+        RESULTADOS DE CARRERA - DUCK APP PRO
+=============================================
+
+🏁 **INFORMACIÓN DE LA CARRERA** 🏁
+--------------------------------------
+Carrera: carrera 1
+Categoría: Niños
+Fecha: 2025-12-13 19:41:11
+
+🏆 **GANADOR DE LA CARRERA** 🏆
+--------------------------------------
+Nombre: Participante 4 (Pato #103)
+Tiempo: 33,12 segundos
+Posición: 1° Lugar
+
+🏅 **PODIO OFICIAL** 🏅
+--------------------------------------
+🥇 P
