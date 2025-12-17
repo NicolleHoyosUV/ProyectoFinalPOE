@@ -278,7 +278,7 @@ public class Simulacion extends JFrame {
         String tercerLugar = obtenerNombreParticipante(indicesPodio[2]);
 
         // Calcular tiempo simulado basado en la distancia recorrida
-        //double tiempoGanador = calcularTiempo(patosArray[0].getX());
+
         double tiempoGanador = obtenerTiempoReal();
 
         // Crear ArrayList para el podio
@@ -327,36 +327,74 @@ public class Simulacion extends JFrame {
         return "Participante " + (index + 1) + " (Genérico)";
     }
 
-    // Mostrar mensaje del podio
+
+    //mostrar podio
+
     private void mostrarMensajePodio(Resultado resultado, JLabel[] patosArray) {
-        StringBuilder mensaje = new StringBuilder();
 
-        mensaje.append("🏆 **RESULTADOS OFICIALES** 🏆\n\n");
-        mensaje.append("📌 Nombre de la carrera: ").append(resultado.getCarrera()).append("\n");
-        mensaje.append("📋 Categoría: ").append(resultado.getCategoria()).append("\n");
-        mensaje.append("📅 Fecha y hora: ").append(resultado.getFecha()).append("\n\n\n");
+        JPanel panel = new JPanel(new BorderLayout());
+        // Carga la imagen del podio
+        ImageIcon iconoPodio = new ImageIcon(getClass().getResource("/podio.jpg"));
+        Image img = iconoPodio.getImage().getScaledInstance(400, 250, Image.SCALE_SMOOTH);
 
-        mensaje.append("---------------------------------------------------------------------------------------------\n");
-        mensaje.append("                                      🥇 **PRIMER LUGAR:**\n");
-        mensaje.append("                           ").append(resultado.getGanador()).append("\n\n");
+        JPanel panelImagen = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
-        mensaje.append("🥈 **SEGUNDO LUGAR:**                                "+"🥉 **TERCER LUGAR:**\n");
-        mensaje.append("   ").append(resultado.getPodio().get(1)).append("                                  "); mensaje.append(" ").append(resultado.getPodio().get(2)).append("\n");
+        panelImagen.setPreferredSize(new Dimension(400, 250));
+        panelImagen.setLayout(null);
 
-        mensaje.append("---------------------------------------------------------------------------------------------\n\n");
+        // Nombres de los ganadores registrados
+        String[] ganadores = {
+                resultado.getPodio().get(0), // 1er lugar
+                resultado.getPodio().get(1), // 2do lugar
+                resultado.getPodio().get(2)  // 3er lugar
+        };
 
 
-        mensaje.append("⏱️  Tiempo del ganador: ").append(String.format("%.2f", resultado.getTiempo())).append(" segundos\n\n");
+        int[][] posiciones = {
+                {140, 110}, // Segundo lugar en el podio
+                {60, 140},  // Primer lugar en el podio
+                {230, 150}  // Tercer lugar en el podio
+        };
 
-       mensaje.append("\n🎉 ¡Felicidades a los ganadores! 🎉");
+        for (int i = 0; i < 3; i++) {
+            JLabel lblGanador = new JLabel(ganadores[i]);
+            lblGanador.setFont(new Font("Arial", Font.BOLD, 11));
+            lblGanador.setForeground(Color.BLACK);
+            lblGanador.setBounds(posiciones[i][0], posiciones[i][1], 140, 20);
+            lblGanador.setHorizontalAlignment(SwingConstants.CENTER);
+            panelImagen.add(lblGanador);
+        }
 
+        panel.add(panelImagen, BorderLayout.CENTER);
+
+        // Panel de informacion
+        JPanel panelInfo = new JPanel(new GridLayout(0, 1, 5, 5));
+        panelInfo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        panelInfo.add(new JLabel("🏆 " + resultado.getCarrera()));
+        panelInfo.add(new JLabel("⏱️ Tiempo ganador: "
+                + String.format("%.2f", resultado.getTiempo()) + " seg"));
+        panelInfo.add(new JLabel("📅 " + resultado.getFecha()));
+
+        panel.add(panelInfo, BorderLayout.SOUTH);
+
+        // Mostrar diálogo
         JOptionPane.showMessageDialog(
                 this,
-                mensaje.toString(),
+                panel,
                 "🏁 ¡Carrera Finalizada!",
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
+
+
+
     //cuando se oprime le boton ver resultados entonces cierra la vista simulacion y abre la vista resultados
     private void verResultados() {
         this.dispose(); // Cierra la vista actual
